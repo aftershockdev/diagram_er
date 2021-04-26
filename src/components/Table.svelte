@@ -1,15 +1,15 @@
 <script lang='ts'>
 import type { IDataModel, ITablePosition} from '../interfaces/diagram';
-import {onMount} from 'svelte';
 
 export let data: IDataModel;
 export let position: ITablePosition;
+export let onDown;
+
+let movingTable: HTMLElement;
 
 const tablePosition = position[data.tableName]
-let movingTable: Element;
 
 </script>
-
 
 <table class="table" style="
   left:{tablePosition.left}px;
@@ -17,19 +17,20 @@ let movingTable: Element;
   width:{tablePosition.width}px;
   height: {tablePosition.height}px"
   bind:this={movingTable}
+  on:mousedown={onDown(event, movingTable, data.tableName)}
 >
   <caption>{data.tableName}</caption>
     <thead>
       <th>'№'</th>
       <th>Name</th>
-      <th>Value</th>
+      <th>Type</th>
     </thead>
     <tbody>
       {#each data.tableColumns as el, i}
         <tr>
           <td>{i+1}</td>
           <td>{el.colName}</td>
-          <td>{el.dataType}</td>
+          <td>{el.colType}</td>
         </tr>
       {/each}
     </tbody>

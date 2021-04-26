@@ -5,7 +5,7 @@ export interface IDataModel {
 
 export interface IColumnModel {
   colName: string;
-  dataType: string | number;
+  colType: string;
 }
 
 export interface ITablePosition {
