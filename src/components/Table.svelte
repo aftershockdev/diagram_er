@@ -8,24 +8,14 @@ export let position: ITablePosition;
 const tablePosition = position[data.tableName]
 let movingTable: Element;
 
-const style = {
-  left: `${tablePosition.left}px`,
-  top: `${tablePosition.top}px`,
-  width: `${tablePosition.width}px`,
-  height: `${tablePosition.height}px`,
-}
-
-onMount(() => {
-  console.log(movingTable)
-})
 </script>
 
 
 <table class="table" style="
-  left:{style.left};
-  top:{style.top};
-  width:{style.width};
-  height: {style.height}"
+  left:{tablePosition.left}px;
+  top:{tablePosition.top}px;
+  width:{tablePosition.width}px;
+  height: {tablePosition.height}px"
   bind:this={movingTable}
 >
   <caption>{data.tableName}</caption>
