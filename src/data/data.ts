@@ -168,3 +168,22 @@ export const tablesOnDiagram_5 = {
     height: 200,
   },
 };
+
+export const tablesRelations = [
+  {
+    from: "Products",
+    to: "Orders",
+  },
+  {
+    from: "Products",
+    to: "Orders",
+  },
+  {
+    from: "Products",
+    to: "Orders",
+  },
+  {
+    from: "Products",
+    to: "Orders",
+  },
+];

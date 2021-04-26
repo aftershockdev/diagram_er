@@ -4,10 +4,6 @@
 </script>
 
 <main>
-  <Diagram data={data} tablesPosition={tablesOnDiagram}/>
-  <Diagram data={data} tablesPosition={tablesOnDiagram_2}/>
-  <Diagram data={data} tablesPosition={tablesOnDiagram_3}/>
-  <Diagram data={data} tablesPosition={tablesOnDiagram_4}/>
-  <Diagram data={data} tablesPosition={tablesOnDiagram_5}/>
+  <Diagram tables={data} tablesPosition={tablesOnDiagram}/>
 </main>
 
