@@ -1,189 +1,122 @@
-export const data = [
-  {
-    tableName: "Products",
-    tableColumns: [
-      { colName: "ProductID", colType: "number" },
-      { colName: "ProductName", colType: "string" },
-      { colName: "SupplierID", colType: "number" },
-      { colName: "CategoryID", colType: "number" },
-    ],
-  },
-  {
-    tableName: "Suppliers",
-    tableColumns: [
-      { colName: "SupplierID", colType: "number" },
-      { colName: "CompanyName", colType: "number" },
-      { colName: "ContactName", colType: "number" },
-      { colName: "Address", colType: "string" },
-    ],
-  },
-  {
-    tableName: "Categories",
-    tableColumns: [
-      { colName: "CategoryID", colType: "number" },
-      { colName: "CategoryName", colType: "string" },
-      { colName: "Description", colType: "string" },
-      { colName: "Picture", colType: "number" },
-    ],
-  },
-  {
-    tableName: "Orders",
-    tableColumns: [
-      { colName: "OrderID", colType: "number" },
-      { colName: "ProductID", colType: "number" },
-      { colName: "UnitPrice", colType: "number" },
-      { colName: "Quantity", colType: "number" },
-      { colName: "Discount", colType: "number" },
-    ],
-  },
-];
+import type { IDataModel, ITableOnDiagram } from "../interfaces/diagram";
 
-export const tablesOnDiagram = {
-  Products: {
+import { SideEnum } from "../interfaces/diagram";
+
+export const dataModel: IDataModel = {
+  tables: [
+    {
+      name: "Products",
+      columns: [
+        { name: "ProductID", type: "number" },
+        { name: "ProductName", type: "string" },
+        { name: "SupplierID", type: "number" },
+        { name: "CategoryID", type: "number" },
+      ],
+    },
+    {
+      name: "Suppliers",
+      columns: [
+        { name: "SupplierID", type: "number" },
+        { name: "CompanyName", type: "number" },
+        { name: "ContactName", type: "number" },
+        { name: "Address", type: "string" },
+      ],
+    },
+    {
+      name: "Categories",
+      columns: [
+        { name: "CategoryID", type: "number" },
+        { name: "CategoryName", type: "string" },
+        { name: "Description", type: "string" },
+        { name: "Picture", type: "number" },
+      ],
+    },
+    {
+      name: "Orders",
+      columns: [
+        { name: "OrderID", type: "number" },
+        { name: "ProductID", type: "number" },
+        { name: "UnitPrice", type: "number" },
+        { name: "Quantity", type: "number" },
+        { name: "Discount", type: "number" },
+      ],
+    },
+  ],
+  relations: [
+    {
+      name: "one",
+      from: {
+        side: SideEnum.right,
+        shift: 5,
+      },
+      to: {
+        side: SideEnum.left,
+        shift: 7,
+      },
+    },
+    {
+      name: "two",
+      from: {
+        side: SideEnum.right,
+        shift: 5,
+      },
+      to: {
+        side: SideEnum.left,
+        shift: 7,
+      },
+    },
+    {
+      name: "three",
+      from: {
+        side: SideEnum.right,
+        shift: 5,
+      },
+      to: {
+        side: SideEnum.left,
+        shift: 7,
+      },
+    },
+    {
+      name: "four",
+      from: {
+        side: SideEnum.right,
+        shift: 5,
+      },
+      to: {
+        side: SideEnum.left,
+        shift: 7,
+      },
+    },
+  ],
+};
+
+export const tablesOnDiagram: ITableOnDiagram[] = [
+  {
+    name: "Products",
     left: 50,
     top: 200,
     width: 200,
     height: 200,
   },
-  Suppliers: {
+  {
+    name: "Suppliers",
     left: 320,
     top: 200,
     width: 200,
     height: 200,
   },
-  Categories: {
+  {
+    name: "Categories",
     left: 600,
     top: 200,
     width: 200,
     height: 200,
   },
-  Orders: {
+  {
+    name: "Orders",
     left: 880,
     top: 200,
     width: 300,
     height: 200,
-  },
-};
-export const tablesOnDiagram_2 = {
-  Products: {
-    left: 1200,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Suppliers: {
-    left: 320,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Categories: {
-    left: 600,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Orders: {
-    left: 880,
-    top: 300,
-    width: 300,
-    height: 200,
-  },
-};
-export const tablesOnDiagram_3 = {
-  Products: {
-    left: 1800,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Suppliers: {
-    left: 320,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Categories: {
-    left: 600,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Orders: {
-    left: 880,
-    top: 300,
-    width: 300,
-    height: 200,
-  },
-};
-export const tablesOnDiagram_4 = {
-  Products: {
-    left: 1600,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Suppliers: {
-    left: 320,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Categories: {
-    left: 600,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Orders: {
-    left: 880,
-    top: 300,
-    width: 300,
-    height: 200,
-  },
-};
-export const tablesOnDiagram_5 = {
-  Products: {
-    left: 1540,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Suppliers: {
-    left: 320,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Categories: {
-    left: 600,
-    top: 300,
-    width: 200,
-    height: 200,
-  },
-  Orders: {
-    left: 880,
-    top: 300,
-    width: 300,
-    height: 200,
-  },
-};
-
-export const tablesRelations = [
-  {
-    from: "Products",
-    to: "Orders",
-  },
-  {
-    from: "Products",
-    to: "Orders",
-  },
-  {
-    from: "Products",
-    to: "Orders",
-  },
-  {
-    from: "Products",
-    to: "Orders",
   },
 ];

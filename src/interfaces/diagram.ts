@@ -1,9 +1,16 @@
+export enum SideEnum {
+  left = "left",
+  right = "right",
+  top = "top",
+  bottom = "bottom",
+}
+
 export interface IDiagram {
-  tablePosition: ITablePosition[];
+  tablePosition: ITableOnDiagram[];
   relationPosition: IRelationOnDiagram[];
 }
 
-export interface ITablePosition {
+export interface ITableOnDiagram {
   name: string;
   left: number;
   top: number;
@@ -11,19 +18,20 @@ export interface ITablePosition {
   height: number;
 }
 
+export interface IRelativePoint {
+  side: SideEnum;
+  shift: number;
+}
+
 export interface IRelationOnDiagram {
   name: string;
+  from: IRelativePoint;
+  to: IRelativePoint;
 }
 
 export interface IDataModel {
-  table: ITable[];
-  relations: IRelation[];
-}
-
-export interface IRelation {
-  name: string;
-  from: string;
-  to: string;
+  tables: ITable[];
+  relations: IRelationOnDiagram[];
 }
 
 export interface ITable {
@@ -34,23 +42,4 @@ export interface ITable {
 export interface IColumn {
   name: string;
   type: string;
-}
-
-function getTable(model: IDataModel, name: string): ITable {
-  return model.table.find((el) => el.name === name);
-}
-
-function getRelations(
-  model: IDataModel,
-  diagram: IDiagram,
-  name: string
-): IRelationOnDiagram[] {
-  return [];
-}
-
-function getRelativePosition(
-  relations: IRelation,
-  position: IRelationOnDiagram
-): IRelation[] {
-  return [];
 }
