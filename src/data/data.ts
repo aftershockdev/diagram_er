@@ -1,6 +1,5 @@
-import type { IDataModel, ITableOnDiagram } from "../interfaces/diagram";
-
-import { SideEnum } from "../interfaces/diagram";
+import { IDiagram, SideEnum } from "../interfaces/diagram";
+import type { IDataModel } from "../interfaces/data-model";
 
 export const dataModel: IDataModel = {
   tables: [
@@ -45,78 +44,102 @@ export const dataModel: IDataModel = {
   relations: [
     {
       name: "one",
+      from: "Products",
+      to: "Suppliers",
+    },
+    {
+      name: "two",
+      from: "Orders",
+      to: "Categories",
+    },
+    {
+      name: "three",
+      from: "Categories",
+      to: "Orders",
+    },
+    {
+      name: "four",
+      from: "Suppliers",
+      to: "Categories",
+    },
+  ],
+};
+
+export const diagram: IDiagram = {
+  tableOnDiagram: [
+    {
+      name: "Products",
+      left: 50,
+      top: 150,
+      width: 200,
+      height: 200,
+    },
+    {
+      name: "Suppliers",
+      left: 380,
+      top: 200,
+      width: 200,
+      height: 200,
+    },
+    {
+      name: "Categories",
+      left: 650,
+      top: 300,
+      width: 200,
+      height: 200,
+    },
+    {
+      name: "Orders",
+      left: 1050,
+      top: 400,
+      width: 300,
+      height: 200,
+    },
+  ],
+  relationOnDiagram: [
+    {
+      name: "one",
       from: {
-        side: SideEnum.right,
-        shift: 5,
+        side: SideEnum.left,
+        shift: 1,
       },
       to: {
-        side: SideEnum.left,
-        shift: 7,
+        side: SideEnum.right,
+        shift: 5,
       },
     },
     {
       name: "two",
       from: {
-        side: SideEnum.right,
-        shift: 5,
+        side: SideEnum.top,
+        shift: 1,
       },
       to: {
-        side: SideEnum.left,
-        shift: 7,
+        side: SideEnum.bottom,
+        shift: 5,
       },
     },
     {
       name: "three",
       from: {
         side: SideEnum.right,
-        shift: 5,
+        shift: 1,
       },
       to: {
         side: SideEnum.left,
-        shift: 7,
+        shift: 5,
       },
     },
     {
       name: "four",
       from: {
-        side: SideEnum.right,
-        shift: 5,
+        side: SideEnum.top,
+        shift: 1,
       },
       to: {
-        side: SideEnum.left,
-        shift: 7,
+        side: SideEnum.right,
+        shift: 5,
       },
     },
   ],
 };
-
-export const tablesOnDiagram: ITableOnDiagram[] = [
-  {
-    name: "Products",
-    left: 50,
-    top: 200,
-    width: 200,
-    height: 200,
-  },
-  {
-    name: "Suppliers",
-    left: 320,
-    top: 200,
-    width: 200,
-    height: 200,
-  },
-  {
-    name: "Categories",
-    left: 600,
-    top: 200,
-    width: 200,
-    height: 200,
-  },
-  {
-    name: "Orders",
-    left: 880,
-    top: 200,
-    width: 300,
-    height: 200,
-  },
-];
