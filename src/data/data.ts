@@ -77,7 +77,7 @@ export const diagram: IDiagram = {
     {
       name: "Suppliers",
       left: 380,
-      top: 200,
+      top: 400,
       width: 200,
       height: 200,
     },
@@ -101,44 +101,44 @@ export const diagram: IDiagram = {
       name: "one",
       from: {
         side: SideEnum.left,
-        shift: 1,
+        shift: 0,
       },
       to: {
         side: SideEnum.right,
-        shift: 5,
+        shift: 0,
       },
     },
     {
       name: "two",
       from: {
         side: SideEnum.top,
-        shift: 1,
+        shift: 0,
       },
       to: {
         side: SideEnum.bottom,
-        shift: 5,
+        shift: 0,
       },
     },
     {
       name: "three",
       from: {
         side: SideEnum.right,
-        shift: 1,
+        shift: 0,
       },
       to: {
         side: SideEnum.left,
-        shift: 5,
+        shift: 0,
       },
     },
     {
       name: "four",
       from: {
         side: SideEnum.top,
-        shift: 1,
+        shift: 0,
       },
       to: {
         side: SideEnum.right,
-        shift: 5,
+        shift: 0,
       },
     },
   ],

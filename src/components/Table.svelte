@@ -1,57 +1,65 @@
 <script lang="ts">
-import type {  IDiagram, ITableOnDiagram } from "../interfaces/diagram";
-import { dataModel } from '../data/data'
-import { getTable } from '../modules/getTable'
+  import type { IDataModel } from "../interfaces/data-model";
 
-export let tablePos: ITableOnDiagram;
+  import type { ITableOnDiagram } from "../interfaces/diagram";
+  import { getTable } from "../modules/getTable";
 
-const { columns } = getTable(dataModel, tablePos.name)
+  export let dataModel: IDataModel;
+  export let tablePos: ITableOnDiagram;
 
+  const { columns } = getTable(dataModel, tablePos.name);
 </script>
 
-
-<table class='table' style="
-left: {tablePos.left}px;
-top: {tablePos.top}px;
-width: {tablePos.width}px;
-height: {tablePos.height}px">
-
-  <caption>{tablePos.name}</caption>
-  <thead>
-    <th>'№'</th>
-    <th>Name</th>
-    <th>Type</th>
-  </thead>
+<div
+  class="table"
+  style="
+  left: {tablePos.left}px;
+  top: {tablePos.top}px;
+  width: {tablePos.width}px;
+  height: {tablePos.height}px"
+>
+  <p>{tablePos.name}</p>
+  <div class="t-header">
+    <p>'№'</p>
+    <p>Name</p>
+    <p>Type</p>
+  </div>
   {#each columns as col, i}
-  <tr>
-    <td>{i+1}</td>
-    <td>{col.name}</td>
-    <td>{col.type}</td>
-  </tr>
+    <div class="t-body">
+      <p>{i + 1}</p>
+      <p>{col.name}</p>
+      <p>{col.type}</p>
+    </div>
   {/each}
-</table>
-
+</div>
 
 <style>
-.table {
-  border-collapse: collapse;
-  position: absolute;
-  background: rgba(0, 0, 0, .3);
-  cursor: pointer;
-}
-.table:active {
-  background: #a0d2e6;
-}
-th,
-td,
-caption {
-  border: 1px solid lightgray;
-  opacity: 0.5;
-}
-caption {
-  font-weight: bold;
-  border: 1px solid rgb(103, 1, 204);
-  background-color: rgb(103, 1, 204);
-  color: #fff;
-}
+  .table {
+    position: absolute;
+    background: steelblue;
+    opacity: 0.5;
+    background: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+  }
+  .table p {
+    margin: 0;
+    padding: 0;
+  }
+  .t-header {
+    font-weight: bold;
+    border: 1px solid rgb(103, 1, 204);
+    background-color: rgb(103, 1, 204);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 5px;
+    align-items: center;
+  }
+  .t-body {
+    display: grid;
+    grid-template-columns: 40px 100px 1fr;
+    grid-template-rows: 30px;
+  }
 </style>
