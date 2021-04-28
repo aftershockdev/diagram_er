@@ -8,10 +8,11 @@
   export let diagram: IDiagram;
 
   const points = getRelativePoint(dataModel, diagram, relation.name);
+
 </script>
 
 <polyline
-  points="40 250, 20 250, 20 650, 610 650, 610 500, 590 500"
+  points={points}
   style="stroke:red;stroke-width:4; fill:transparent;"
 />
 

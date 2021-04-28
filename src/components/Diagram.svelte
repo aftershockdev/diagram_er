@@ -17,7 +17,7 @@
     The mouse position is {m.x} x {m.y}
   </div>
   <svg width="100%" height="100%">
-    {#each [relationOnDiagram[0]] as rel}
+    {#each relationOnDiagram as rel}
       <Line {dataModel} relation={rel} {diagram} />
     {/each}
   </svg>

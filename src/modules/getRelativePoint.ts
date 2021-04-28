@@ -22,5 +22,7 @@ export const getRelativePoint = (
   const startPoint = getPoint(startPos, startSide.side);
   const endPoint = getPoint(endPos, endSide.side);
 
-  return 'points'
+  const result = `${startPoint.x} ${startPoint.y}, ${endPoint.x} ${endPoint.y}`
+  
+  return result
 };

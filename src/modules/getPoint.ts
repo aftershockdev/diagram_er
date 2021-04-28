@@ -5,20 +5,20 @@ export const getPoint = (position: ITableOnDiagram, side: SideEnum): IPoint => {
   let y: number;
   switch (side) {
     case SideEnum.left:
-      x = position.left - 10;
+      x = position.left;
       y = position.height / 2 + position.top;
       return { x, y };
     case SideEnum.right:
-      x = position.left + position.width + 10;
+      x = position.left + position.width;
       y = position.height / 2 + position.top;
       return { x, y };
     case SideEnum.top:
       x = position.width / 2 + position.left;
-      y = position.top - 10;
+      y = position.top;
       return { x, y };
     case SideEnum.bottom:
       x = position.width / 2 + position.left;
-      y = position.top + position.height + 10;
+      y = position.top + position.height;
       return { x, y };
   }
 };
