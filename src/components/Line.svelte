@@ -1,8 +1,8 @@
 <script lang="ts">
-  export let point: string;
+  export let points: any;
 </script>
 
 <polyline
-  points={point}
+  points={points}
   style="stroke:red;stroke-width:4; fill:transparent;"
 />
