@@ -1,13 +1,11 @@
 <script lang="ts">
-  import type { IDataModel } from "../interfaces/data-model";
-
+  import type { ITable } from "../interfaces/data-model";
   import type { ITableOnDiagram } from "../interfaces/diagram";
-  import { getTable } from "../modules/getTable";
 
-  export let dataModel: IDataModel;
+  export let tables: ITable[];
   export let tablePos: ITableOnDiagram;
 
-  const { columns } = getTable(dataModel, tablePos.name);
+  const { columns } = tables.find(el => el.name === tablePos.name);
 </script>
 
 <div

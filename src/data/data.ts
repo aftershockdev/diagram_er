@@ -41,28 +41,6 @@ export const dataModel: IDataModel = {
       ],
     },
   ],
-  relations: [
-    {
-      name: "one",
-      from: "Products",
-      to: "Suppliers",
-    },
-    {
-      name: "two",
-      from: "Orders",
-      to: "Categories",
-    },
-    {
-      name: "three",
-      from: "Categories",
-      to: "Orders",
-    },
-    {
-      name: "four",
-      from: "Suppliers",
-      to: "Categories",
-    },
-  ],
 };
 
 export const diagram: IDiagram = {
@@ -96,47 +74,216 @@ export const diagram: IDiagram = {
       height: 200,
     },
   ],
-  relationOnDiagram: [
+  relationToShow: [
     {
-      name: "one",
       from: {
+        name: "Products",
         side: SideEnum.left,
         shift: 0,
       },
       to: {
+        name: "Suppliers",
         side: SideEnum.right,
         shift: 0,
       },
     },
     {
-      name: "two",
       from: {
+        name: "Orders",
         side: SideEnum.top,
         shift: 0,
       },
       to: {
+        name: "Categories",
         side: SideEnum.bottom,
         shift: 0,
       },
     },
     {
-      name: "three",
       from: {
+        name: "Categories",
         side: SideEnum.right,
         shift: 0,
       },
       to: {
+        name: "Orders",
         side: SideEnum.left,
         shift: 0,
       },
     },
     {
-      name: "four",
       from: {
+        name: "Suppliers",
         side: SideEnum.top,
         shift: 0,
       },
       to: {
+        name: "Products",
+        side: SideEnum.right,
+        shift: 0,
+      },
+    },
+  ],
+};
+
+export const diagram_1: IDiagram = {
+  tableOnDiagram: [
+    {
+      name: "Products",
+      left: 380,
+      top: 500,
+      width: 200,
+      height: 200,
+    },
+    {
+      name: "Suppliers",
+      left: 50,
+      top: 400,
+      width: 200,
+      height: 200,
+    },
+    {
+      name: "Categories",
+      left: 780,
+      top: 300,
+      width: 200,
+      height: 200,
+    },
+    {
+      name: "Orders",
+      left: 1350,
+      top: 650,
+      width: 300,
+      height: 200,
+    },
+  ],
+  relationToShow: [
+    {
+      from: {
+        name: "Products",
+        side: SideEnum.left,
+        shift: 0,
+      },
+      to: {
+        name: "Categories",
+        side: SideEnum.left,
+        shift: 0,
+      },
+    },
+    {
+      from: {
+        name: "Orders",
+        side: SideEnum.left,
+        shift: 0,
+      },
+      to: {
+        name: "Categories",
+        side: SideEnum.bottom,
+        shift: 0,
+      },
+    },
+    {
+      from: {
+        name: "Suppliers",
+        side: SideEnum.right,
+        shift: 0,
+      },
+      to: {
+        name: "Categories",
+        side: SideEnum.left,
+        shift: 0,
+      },
+    },
+    {
+      from: {
+        name: "Products",
+        side: SideEnum.top,
+        shift: 0,
+      },
+      to: {
+        name: "Categories",
+        side: SideEnum.top,
+        shift: 0,
+      },
+    },
+  ],
+};
+export const diagram_2: IDiagram = {
+  tableOnDiagram: [
+    {
+      name: "Products",
+      left: 20,
+      top: 700,
+      width: 200,
+      height: 200,
+    },
+    {
+      name: "Suppliers",
+      left: 470,
+      top: 640,
+      width: 200,
+      height: 200,
+    },
+    {
+      name: "Categories",
+      left: 650,
+      top: 300,
+      width: 200,
+      height: 200,
+    },
+    {
+      name: "Orders",
+      left: 1050,
+      top: 400,
+      width: 300,
+      height: 200,
+    },
+  ],
+  relationToShow: [
+    {
+      from: {
+        name: "Products",
+        side: SideEnum.left,
+        shift: 0,
+      },
+      to: {
+        name: "Suppliers",
+        side: SideEnum.right,
+        shift: 0,
+      },
+    },
+    {
+      from: {
+        name: "Suppliers",
+        side: SideEnum.top,
+        shift: 0,
+      },
+      to: {
+        name: "Orders",
+        side: SideEnum.bottom,
+        shift: 0,
+      },
+    },
+    {
+      from: {
+        name: "Categories",
+        side: SideEnum.right,
+        shift: 0,
+      },
+      to: {
+        name: "Orders",
+        side: SideEnum.left,
+        shift: 0,
+      },
+    },
+    {
+      from: {
+        name: "Suppliers",
+        side: SideEnum.top,
+        shift: 0,
+      },
+      to: {
+        name: "Products",
         side: SideEnum.right,
         shift: 0,
       },

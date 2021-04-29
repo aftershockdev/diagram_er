@@ -7,10 +7,11 @@ export enum SideEnum {
 
 export interface IDiagram {
   tableOnDiagram: ITableOnDiagram[];
-  relationOnDiagram: IRelationOnDiagram[];
+  relationToShow: IRelationToShow[];
 }
 
 export interface IRelativePoint {
+  name: string;
   side: SideEnum;
   shift: number;
 }
@@ -19,8 +20,7 @@ export interface IPoint {
   x: number;
   y: number;
 }
-export interface IRelationOnDiagram {
-  name: string;
+export interface IRelationToShow {
   from: IRelativePoint;
   to: IRelativePoint;
 }

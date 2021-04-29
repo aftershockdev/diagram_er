@@ -1,6 +1,5 @@
 export interface IDataModel {
   tables: ITable[];
-  relations: IRelation[];
 }
 
 export interface ITable {
@@ -11,10 +10,4 @@ export interface ITable {
 export interface IColumn {
   name: string;
   type: string;
-}
-
-export interface IRelation {
-  name: string;
-  from: string;
-  to: string;
 }
