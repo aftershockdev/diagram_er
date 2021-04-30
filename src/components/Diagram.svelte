@@ -6,16 +6,19 @@
   import Line from "./Line.svelte";
   import Table from "./Table.svelte";
 
+  let m = { x: 0, y: 0 };
+
   export let diagram: IDiagram;
   export let dataModel: IDataModel;
 
   const { tables } = dataModel;
-  const { tableOnDiagram, relationToShow } = diagram;
+  const { tableOnDiagram } = diagram;
 
-  const relationPoints = getRelationPoints(tableOnDiagram, relationToShow);
+  const relationPoints = getRelationPoints(diagram);
 </script>
 
-<div class="wrapper">
+<div class="wrapper" on:mousemove="{e => m = { x: e.clientX, y: e.clientY }}">
+  <div class="p">The mouse position is {m.x} x {m.y}</div>
   <svg width="100%" height="100%">
     {#each relationPoints as points}
       <Line {points} />
@@ -31,5 +34,8 @@
     position: relative;
     height: 100vh;
     background: rgba(0, 0, 0, 0.1);
+  }
+  .p {
+    position: absolute;
   }
 </style>

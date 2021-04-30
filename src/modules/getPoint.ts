@@ -1,9 +1,10 @@
-import { IPoint, ITableOnDiagram, SideEnum } from "../interfaces/diagram";
+import { IPoint, IRelativePoint, ITableOnDiagram, SideEnum } from "../interfaces/diagram";
 
-export const getPoint = (pos: ITableOnDiagram, side: SideEnum): IPoint => {
-  const divison = 2;
-  const yPos = pos.height / divison + pos.top;
-  const xPos = pos.width / divison + pos.left;
+export const getPoint = (pos: ITableOnDiagram, rel: IRelativePoint): IPoint => {
+  const divison = 0.5;
+  const yPos = pos.height * divison + pos.top;
+  const xPos = pos.width * divison + pos.left;
+  const { side } = rel;
   switch (side) {
     case SideEnum.left:
       return { x: pos.left, y: yPos };

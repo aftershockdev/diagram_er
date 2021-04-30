@@ -55,7 +55,7 @@ export const diagram: IDiagram = {
     {
       name: "Suppliers",
       left: 380,
-      top: 400,
+      top: 500,
       width: 200,
       height: 200,
     },
@@ -212,7 +212,7 @@ export const diagram_2: IDiagram = {
   tableOnDiagram: [
     {
       name: "Products",
-      left: 20,
+      left: 120,
       top: 700,
       width: 200,
       height: 200,

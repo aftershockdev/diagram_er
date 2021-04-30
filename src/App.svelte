@@ -8,4 +8,3 @@
   <Diagram diagram={diagram_1} dataModel={dataModel}/>
   <Diagram diagram={diagram_2} dataModel={dataModel}/>
 </main>
-
