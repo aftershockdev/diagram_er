@@ -11,12 +11,14 @@ export const getInterimPoints = (
 
   const midX = start.x - xDif / 2;
   const midY = start.y - yDif / 2;
-  if (startSide === SideEnum.bottom || endSide === SideEnum.bottom) {
+
+  if (startSide === SideEnum.bottom || endSide === SideEnum.bottom || startSide === SideEnum.top || endSide === SideEnum.top) {
     return [
       { x: midX, y: start.y },
       { x: midX, y: end.y },
     ];
   }
+
   return [
     { x: start.x, y: midY },
     { x: end.x, y: midY },

@@ -16,8 +16,8 @@
   width: {tablePos.width}px;
   height: {tablePos.height}px"
 >
-  <p>{tablePos.name}</p>
-  <div class="t-header">
+   <p>{tablePos.name}</p>
+  <!-- <div class="t-header">
     <p>'№'</p>
     <p>Name</p>
     <p>Type</p>
@@ -28,18 +28,20 @@
       <p>{col.name}</p>
       <p>{col.type}</p>
     </div>
-  {/each}
+  {/each}  -->
 </div>
 
 <style>
   .table {
     position: absolute;
-    background: steelblue;
+    background: black;
     opacity: 0.5;
-    background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
   }
   .table p {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 500;
     margin: 0;
     padding: 0;
   }

@@ -50,7 +50,8 @@
 <style>
   .wrapper {
     position: relative;
-    height: 100vh;
+    height: 500px;
+    width: 500px;
     background: rgba(0, 0, 0, 0.1);
   }
   .p {
