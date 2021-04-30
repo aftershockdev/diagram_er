@@ -24,22 +24,22 @@
 <div class="wrapper" on:mousemove={(e) => (m = { x: e.clientX, y: e.clientY })}>
   <div class="p">The mouse position is {m.x} x {m.y}</div>
   <svg width="100%" height="100%">
-    <defs>
-      <marker
-        id="Line"
-        markerWidth="4"
-        markerHeight="12"
-        refX="10"
-        refY="0"
-        viewBox="-2 -6 4 12"
-        markerUnits="userSpaceOnUse"
-        orient="auto"
-      >
-        <rect x="-1" y="-5" width="2" height="10" />
-      </marker>
-    </defs>
+    <marker id="fromOne" markerWidth="16" markerHeight="16" refX="-5" refY="6" orient="auto">
+      <rect x="0" y="-8" width="1" height="20" />
+      <rect x="4" y="-8" width="1" height="20" />
+    </marker>
+
+    <marker id="toMany" markerWidth="16" markerHeight="16" refX="8" refY="0" orient="auto" viewBox="-8 -8 16 16">
+      <rect x="0" y="-6" width="1" height="12" />
+      <path d="M 0,0 L 8,6 M 0,0 L 8,-6" stroke="red" stroke-width="1" />
+    </marker>
+
     {#each relationPoints as points}
-      <polyline points={convertToString(points)} marker-end="url(#Line)" />
+      <polyline
+        points={convertToString(points)}
+        marker-start="url(#fromOne)"
+        marker-end="url(#toMany)"
+      />
     {/each}
   </svg>
   {#each tableOnDiagram as tablePos}
