@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { ITable } from "../interfaces/data-model";
-  import type { ITableOnDiagram } from "../interfaces/diagram";
+  import type { ITable } from "./data-model";
+  import type { ITableOnDiagram } from "../Diagram/diagram";
 
   export let tables: ITable[];
   export let tablePos: ITableOnDiagram;
@@ -38,8 +38,6 @@
     opacity: 0.5;
     background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    height: 100%;
-    width: 100%;
   }
   .table p {
     margin: 0;
@@ -52,7 +50,7 @@
     color: #fff;
     display: flex;
     justify-content: space-between;
-    padding: 0px 5px;
+    padding: 5px 10px;
     align-items: center;
   }
   .t-body {

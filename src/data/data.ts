@@ -1,5 +1,5 @@
-import { IDiagram, SideEnum } from "../interfaces/diagram";
-import type { IDataModel } from "../interfaces/data-model";
+import { IDiagram, SideEnum } from "../components/Diagram/diagram";
+import type { IDataModel } from "../components/Table/data-model";
 
 export const dataModel: IDataModel = {
   tables: [

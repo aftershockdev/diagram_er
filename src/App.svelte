@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Diagram from './components/Diagram.svelte';
+  import Diagram from './components/Diagram/Diagram.svelte';
   import { diagram, diagram_1, diagram_2, dataModel } from './data/data';
 </script>
 

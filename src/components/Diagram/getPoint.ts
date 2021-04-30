@@ -1,4 +1,4 @@
-import { IPoint, IRelativePoint, ITableOnDiagram, SideEnum } from "../interfaces/diagram";
+import { IPoint, IRelativePoint, ITableOnDiagram, SideEnum } from "./diagram";
 
 export const getPoint = (pos: ITableOnDiagram, rel: IRelativePoint): IPoint => {
   const divison = 0.5;
