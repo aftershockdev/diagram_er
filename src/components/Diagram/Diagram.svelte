@@ -3,6 +3,7 @@
   import type { IDiagram, IPoint } from "./diagram";
   import { getRelationPoints } from "./getRelationPoints";
   import Table from "../Table/Table.svelte";
+  import Marker from "./Marker.svelte";
 
   export let diagram: IDiagram;
   export let dataModel: IDataModel;
@@ -28,23 +29,11 @@
 <div class="wrapper" on:mousemove={(e) => (m = { x: e.clientX, y: e.clientY })}>
   <div class="p">The mouse position is {m.x} x {m.y}</div>
   <svg width="100%" height="100%">
-    <marker id="fromOne" markerWidth="16" markerHeight="16" refX="-5" refY="6" orient="auto">
-      <rect x="0" y="-8" width="1" height="20" />
-      <rect x="4" y="-8" width="1" height="20" />
-    </marker>
-
-    <marker id="toMany" markerWidth="16" markerHeight="16" refX="8" refY="0" orient="auto" viewBox="-8 -8 16 16">
-      <rect x="0" y="-6" width="1" height="12" />
-      <path d="M 0,0 L 8,6 M 0,0 L 8,-6" stroke="red" stroke-width="1" />
-    </marker>
-    {#each getInnerPoints(diagram) as points}
-      <circle
-        cx={points.x}
-        cy={points.y}
-        r='3'
-      />
+    {#each getInnerPoints(diagram) as point}
+        <circle cy={point.y} cx={point.x} r='5'></circle>
     {/each}
     {#each relationPoints as points}
+      <Marker />
       <polyline
         points={convertToString(points)}
         marker-start="url(#fromOne)"

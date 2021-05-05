@@ -4,13 +4,11 @@ import { getNextPoint } from './getNextPoint';
 import { getInterimPoints } from './getInterimPoints';
 
 const getPointFromTable = (d: IDiagram, rel: IRelativePoint): IPoint => {
-  const t = d.tableOnDiagram.find(_ => _.name === rel.name);
+  const t = d.tableOnDiagram.find((_) => _.name === rel.name);
   return getPoint(t, rel);
 };
 
-export const getRelationPoints = (
-  diagram: IDiagram,
-): IPoint[][] => {
+export const getRelationPoints = (diagram: IDiagram): IPoint[][] => {
   const { relationToShow } = diagram;
   return relationToShow.map(({from, to, points}) => {
     const startPoint = getPointFromTable(diagram, from);
@@ -24,7 +22,7 @@ export const getRelationPoints = (
       secondPoint,
       ...interimPoints,
       preEndPoint,
-      endPoint
+      endPoint,
     ];
   });
 };
