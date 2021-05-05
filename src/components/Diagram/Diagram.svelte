@@ -23,15 +23,26 @@
       return curV === "" ? v : `${curV}, ${v}`;
     }, "");
 
+  let pickedPoint: IPoint;
+
+  const pickPoint = (point: IPoint): any => {
+    pickedPoint = point
+  }
+  const movePoint = (ev?: MouseEvent): void => {
+    if(!pickedPoint) return;
+    relationPoints.forEach((_, index) => _.forEach((el, i) => {
+      if(el.x === pickedPoint.x && el.y === pickedPoint.y){
+        relationPoints[index][i].x = ev.offsetX
+        relationPoints[index][i].y = ev.offsetY
+      }
+    }))
+  }
   let m = { x: 0, y: 0 };
 </script>
 
 <div class="wrapper" on:mousemove={(e) => (m = { x: e.clientX, y: e.clientY })}>
   <div class="p">The mouse position is {m.x} x {m.y}</div>
-  <svg width="100%" height="100%">
-    {#each getInnerPoints(diagram) as point}
-        <circle cy={point.y} cx={point.x} r='5'></circle>
-    {/each}
+  <svg width="100%" height="100%" on:mousemove={movePoint}>
     {#each relationPoints as points}
       <Marker />
       <polyline
@@ -39,6 +50,9 @@
         marker-start="url(#fromOne)"
         marker-end="url(#toMany)"
       />
+    {/each}
+    {#each getInnerPoints(diagram) as point}
+      <circle on:click={pickPoint(point)} cy={point.y} cx={point.x} r='6'></circle>
     {/each}
   </svg>
   {#each tableOnDiagram as tablePos}
@@ -55,6 +69,9 @@
   }
   .p {
     position: absolute;
+  }
+  circle {
+    cursor: pointer;
   }
   polyline {
     stroke: red;
