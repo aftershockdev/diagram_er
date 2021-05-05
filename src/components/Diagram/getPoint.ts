@@ -2,8 +2,8 @@ import { IPoint, IRelativePoint, ITableOnDiagram, SideEnum } from "./diagram";
 
 export const getPoint = (pos: ITableOnDiagram, rel: IRelativePoint): IPoint => {
   const divison = 0.5;
-  const yPos = pos.height * divison + pos.top;
-  const xPos = pos.width * divison + pos.left;
+  const yPos = pos.height * divison + pos.top + rel.shift;
+  const xPos = pos.width * divison + pos.left + rel.shift;
   const { side } = rel;
   switch (side) {
     case SideEnum.left:

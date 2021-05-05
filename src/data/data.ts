@@ -79,48 +79,48 @@ export const diagram: IDiagram = {
       from: {
         name: "Products",
         side: SideEnum.left,
-        shift: 0,
+        shift: 10,
       },
       to: {
-        name: "Suppliers",
+        name: "Orders",
         side: SideEnum.right,
-        shift: 0,
+        shift: 15,
       },
     },
     {
       from: {
         name: "Orders",
         side: SideEnum.top,
-        shift: 0,
+        shift: 5,
       },
       to: {
-        name: "Categories",
+        name: "Products",
         side: SideEnum.bottom,
-        shift: 0,
+        shift: 15,
       },
     },
     {
       from: {
         name: "Categories",
         side: SideEnum.right,
-        shift: 0,
+        shift: 10,
       },
       to: {
         name: "Orders",
         side: SideEnum.left,
-        shift: 0,
+        shift: 10,
       },
     },
     {
       from: {
-        name: "Suppliers",
+        name: "Products",
         side: SideEnum.top,
-        shift: 0,
+        shift: 10,
       },
       to: {
-        name: "Products",
-        side: SideEnum.right,
-        shift: 0,
+        name: "Suppliers",
+        side: SideEnum.top,
+        shift: 5,
       },
     },
   ],
@@ -161,19 +161,19 @@ export const diagram_1: IDiagram = {
       from: {
         name: "Products",
         side: SideEnum.top,
-        shift: 0,
+        shift: 10,
       },
       to: {
         name: "Categories",
         side: SideEnum.left,
-        shift: 0,
+        shift: 15,
       },
     },
     {
       from: {
         name: "Orders",
         side: SideEnum.bottom,
-        shift: 0,
+        shift: 10,
       },
       to: {
         name: "Categories",
@@ -185,24 +185,24 @@ export const diagram_1: IDiagram = {
       from: {
         name: "Suppliers",
         side: SideEnum.left,
-        shift: 0,
+        shift: 10,
       },
       to: {
         name: "Categories",
         side: SideEnum.right,
-        shift: 0,
+        shift: -15,
       },
     },
     {
       from: {
         name: "Products",
         side: SideEnum.top,
-        shift: 0,
+        shift: 10,
       },
       to: {
         name: "Categories",
         side: SideEnum.left,
-        shift: 0,
+        shift: 5,
       },
     },
   ],
@@ -243,48 +243,48 @@ export const diagram_2: IDiagram = {
       from: {
         name: "Products",
         side: SideEnum.right,
-        shift: 0,
+        shift: -10,
       },
       to: {
         name: "Suppliers",
         side: SideEnum.left,
-        shift: 0,
+        shift: -10,
       },
     },
     {
       from: {
         name: "Suppliers",
         side: SideEnum.left,
-        shift: 0,
+        shift: 5,
       },
       to: {
         name: "Orders",
         side: SideEnum.right,
-        shift: 0,
+        shift: 8,
       },
     },
     {
       from: {
         name: "Categories",
         side: SideEnum.left,
-        shift: 0,
+        shift: 12,
       },
       to: {
         name: "Orders",
         side: SideEnum.left,
-        shift: 0,
+        shift: 16,
       },
     },
     {
       from: {
         name: "Suppliers",
         side: SideEnum.top,
-        shift: 0,
+        shift: 8,
       },
       to: {
         name: "Products",
         side: SideEnum.right,
-        shift: 0,
+        shift: 10,
       },
     },
   ],
@@ -325,48 +325,48 @@ export const diagram_3: IDiagram = {
       from: {
         name: "Products",
         side: SideEnum.left,
-        shift: 0,
+        shift: 12,
       },
       to: {
         name: "Suppliers",
         side: SideEnum.right,
-        shift: 0,
+        shift: 8,
       },
     },
     {
       from: {
         name: "Suppliers",
         side: SideEnum.left,
-        shift: 0,
+        shift: 15,
       },
       to: {
         name: "Orders",
         side: SideEnum.right,
-        shift: 0,
+        shift: 5,
       },
     },
     {
       from: {
         name: "Categories",
         side: SideEnum.left,
-        shift: 0,
+        shift: 10,
       },
       to: {
         name: "Orders",
         side: SideEnum.left,
-        shift: 0,
+        shift: 11,
       },
     },
     {
       from: {
         name: "Suppliers",
         side: SideEnum.top,
-        shift: 0,
+        shift: 7,
       },
       to: {
         name: "Products",
         side: SideEnum.right,
-        shift: 0,
+        shift: 3,
       },
     },
   ],
@@ -407,48 +407,48 @@ export const diagram_4: IDiagram = {
       from: {
         name: "Products",
         side: SideEnum.bottom,
-        shift: 0,
+        shift: 10,
       },
       to: {
         name: "Suppliers",
         side: SideEnum.right,
-        shift: 0,
+        shift: -10,
       },
     },
     {
       from: {
         name: "Suppliers",
         side: SideEnum.top,
-        shift: 0,
+        shift: 5,
       },
       to: {
         name: "Orders",
         side: SideEnum.bottom,
-        shift: 0,
+        shift: 10,
       },
     },
     {
       from: {
         name: "Categories",
         side: SideEnum.left,
-        shift: 0,
+        shift: 12,
       },
       to: {
         name: "Orders",
         side: SideEnum.left,
-        shift: 0,
+        shift: 9,
       },
     },
     {
       from: {
         name: "Suppliers",
         side: SideEnum.right,
-        shift: 0,
+        shift: 10,
       },
       to: {
         name: "Products",
         side: SideEnum.left,
-        shift: 0,
+        shift: 12,
       },
     },
   ],
@@ -489,36 +489,36 @@ export const diagram_5: IDiagram = {
       from: {
         name: "Products",
         side: SideEnum.left,
-        shift: 0,
+        shift: 10,
       },
       to: {
         name: "Suppliers",
         side: SideEnum.right,
-        shift: 0,
+        shift: 5,
       },
     },
     {
       from: {
         name: "Suppliers",
         side: SideEnum.left,
-        shift: 0,
+        shift: 5,
       },
       to: {
         name: "Orders",
         side: SideEnum.right,
-        shift: 0,
+        shift: 8,
       },
     },
     {
       from: {
         name: "Categories",
         side: SideEnum.left,
-        shift: 0,
+        shift: 12,
       },
       to: {
         name: "Orders",
         side: SideEnum.left,
-        shift: 0,
+        shift: 10,
       },
     },
     {
@@ -530,7 +530,7 @@ export const diagram_5: IDiagram = {
       to: {
         name: "Products",
         side: SideEnum.right,
-        shift: 0,
+        shift: -10,
       },
     },
   ],
