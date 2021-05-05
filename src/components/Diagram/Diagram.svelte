@@ -61,7 +61,4 @@
     stroke-width: 1;
     fill: transparent;
   }
-  marker {
-    fill: red;
-  }
 </style>
