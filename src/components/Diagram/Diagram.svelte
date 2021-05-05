@@ -12,6 +12,10 @@
 
   const relationPoints = getRelationPoints(diagram);
 
+  export const getInnerPoints = (diagram: IDiagram): IPoint[] =>
+    diagram.relationToShow.filter(rel =>  rel.points !== undefined)
+    .map(_ => _.points).flat()
+
   export const convertToString = (p: IPoint[]): string =>
     p.reduce((curV, _) => {
       const v = `${_.x} ${_.y}`;
@@ -33,7 +37,13 @@
       <rect x="0" y="-6" width="1" height="12" />
       <path d="M 0,0 L 8,6 M 0,0 L 8,-6" stroke="red" stroke-width="1" />
     </marker>
-
+    {#each getInnerPoints(diagram) as points}
+      <circle
+        cx={points.x}
+        cy={points.y}
+        r='3'
+      />
+    {/each}
     {#each relationPoints as points}
       <polyline
         points={convertToString(points)}

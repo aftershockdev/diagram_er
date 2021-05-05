@@ -2,7 +2,7 @@ import { IPoint, IRelativePoint, SideEnum } from "./diagram";
 
 const shift = 20;
 
-export const getNextpoint = (point: IPoint, rel: IRelativePoint): IPoint => {
+export const getNextPoint = (point: IPoint, rel: IRelativePoint): IPoint => {
   switch (rel.side) {
     case SideEnum.bottom:
       return { x: point.x, y: point.y + shift };

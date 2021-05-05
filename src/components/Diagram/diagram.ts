@@ -21,8 +21,10 @@ export interface IPoint {
   y: number;
 }
 export interface IRelationToShow {
+  relName?: string;
   from: IRelativePoint;
   to: IRelativePoint;
+  points?: IPoint[];
 }
 export interface ITableOnDiagram {
   name: string;
