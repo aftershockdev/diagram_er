@@ -2,6 +2,7 @@ import type { IDiagram, IPoint, IRelativePoint } from "./diagram";
 import { getPoint } from "./getPoint";
 import { getNextPoint } from './getNextPoint';
 import { getInterimPoints } from './getInterimPoints';
+import { getOrthogonalPoints } from "./getOrthogonalPoints";
 
 const getPointFromTable = (d: IDiagram, rel: IRelativePoint): IPoint => {
   const t = d.tableOnDiagram.find((_) => _.name === rel.name);
@@ -15,7 +16,10 @@ export const getRelationPoints = (diagram: IDiagram): IPoint[][] => {
     const secondPoint = getNextPoint(startPoint, from);
     const endPoint = getPointFromTable(diagram, to);
     const preEndPoint = getNextPoint(endPoint, to);
-    const interimPoints = points ? points : getInterimPoints(secondPoint, from.side, preEndPoint, to.side);
+    const interimPoints = points ?
+      getOrthogonalPoints(secondPoint, preEndPoint, points):
+      getInterimPoints(secondPoint, from.side, preEndPoint, to.side);
+
 
     return [
       startPoint,

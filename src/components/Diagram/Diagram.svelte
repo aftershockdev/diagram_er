@@ -2,6 +2,7 @@
   import type { IDataModel } from "../Table/data-model";
   import type { IDiagram, IPoint } from "./diagram";
   import { getRelationPoints } from "./getRelationPoints";
+  import { convertToString } from './convertToStr'
   import Table from "../Table/Table.svelte";
   import Marker from "./Marker.svelte";
 
@@ -13,15 +14,10 @@
 
   const relationPoints = getRelationPoints(diagram);
 
-  export const getInnerPoints = (diagram: IDiagram): IPoint[] =>
+  export const getInnerPoints = (diagram: IDiagram): IPoint[][] =>
     diagram.relationToShow.filter(rel =>  rel.points !== undefined)
-    .map(_ => _.points).flat()
+    .map(_ => _.points)
 
-  export const convertToString = (p: IPoint[]): string =>
-    p.reduce((curV, _) => {
-      const v = `${_.x} ${_.y}`;
-      return curV === "" ? v : `${curV}, ${v}`;
-    }, "");
 
   let pickedPoint: IPoint;
 
@@ -37,12 +33,15 @@
       }
     }))
   }
+  const upPoint = (): void => {
+       pickedPoint = null;
+  }
   let m = { x: 0, y: 0 };
 </script>
 
 <div class="wrapper" on:mousemove={(e) => (m = { x: e.clientX, y: e.clientY })}>
   <div class="p">The mouse position is {m.x} x {m.y}</div>
-  <svg width="100%" height="100%" on:mousemove={movePoint}>
+  <svg width="100%" height="100%" on:mousemove={movePoint} on:mouseup={upPoint}>
     {#each relationPoints as points}
       <Marker />
       <polyline
@@ -51,8 +50,8 @@
         marker-end="url(#toMany)"
       />
     {/each}
-    {#each getInnerPoints(diagram) as point}
-      <circle on:click={pickPoint(point)} cy={point.y} cx={point.x} r='6'></circle>
+    {#each relationPoints.flat() as point}
+      <circle on:mousedown={pickPoint(point)} cy={point.y} cx={point.x} r='5'></circle>
     {/each}
   </svg>
   {#each tableOnDiagram as tablePos}
