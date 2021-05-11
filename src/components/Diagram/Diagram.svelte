@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { IDataModel } from "../Table/data-model";
-  import type { IDiagram, IPoint } from "./diagram";
+  import type { IDiagram, IPoint, ITableOnDiagram } from "./diagram";
   import { getRelationPoints } from "./getRelationPoints";
   import { convertToString } from './convertToStr'
   import Table from "../Table/Table.svelte";
@@ -12,36 +12,45 @@
   const { tables } = dataModel;
   const { tableOnDiagram } = diagram;
 
-  const relationPoints = getRelationPoints(diagram);
+  let relationPoints = getRelationPoints(diagram);
 
   export const getInnerPoints = (diagram: IDiagram): IPoint[][] =>
     diagram.relationToShow.filter(rel =>  rel.points !== undefined)
     .map(_ => _.points)
 
+  let pickedTable: ITableOnDiagram;
 
-  let pickedPoint: IPoint;
 
-  const pickPoint = (point: IPoint): any => {
-    pickedPoint = point
+  const pickTable = (table: ITableOnDiagram): any => {
+    pickedTable = table;
   }
-  const movePoint = (ev?: MouseEvent): void => {
-    if(!pickedPoint) return;
-    relationPoints.forEach((_, index) => _.forEach((el, i) => {
-      if(el.x === pickedPoint.x && el.y === pickedPoint.y){
-        relationPoints[index][i].x = ev.offsetX
-        relationPoints[index][i].y = ev.offsetY
-      }
-    }))
+
+  const moveTable = (ev?: MouseEvent): void => {
+    if(!pickedTable) return;
+
+   tableOnDiagram.forEach((_, i)=> {
+     if(_.left === pickedTable.left && _.top === pickedTable.top){
+      diagram.tableOnDiagram[i].left = ev.offsetX;
+      diagram.tableOnDiagram[i].top = ev.offsetY;
+      relationPoints = getRelationPoints(diagram);
+     }
+   })
   }
-  const upPoint = (): void => {
-       pickedPoint = null;
+
+  const stopTable = (): void => {
+    pickedTable = null;
   }
+
   let m = { x: 0, y: 0 };
 </script>
 
 <div class="wrapper" on:mousemove={(e) => (m = { x: e.clientX, y: e.clientY })}>
   <div class="p">The mouse position is {m.x} x {m.y}</div>
-  <svg width="100%" height="100%" on:mousemove={movePoint} on:mouseup={upPoint}>
+  <svg width="100%" height="100%" on:mousemove={moveTable} on:mouseup={stopTable}>
+    {#each diagram.tableOnDiagram as tablePos}
+      <rect on:mousedown={pickTable(tablePos)} x={tablePos.left} y={tablePos.top} width={tablePos.width} height={tablePos.height} fill='blue' opacity='0.5'/>
+    <!-- <Table on:mousedown={pickTable(tablePos)} {tables} {tablePos} /> -->
+    {/each}
     {#each relationPoints as points}
       <Marker />
       <polyline
@@ -51,12 +60,10 @@
       />
     {/each}
     {#each relationPoints.flat() as point}
-      <circle on:mousedown={pickPoint(point)} cy={point.y} cx={point.x} r='5'></circle>
+      <circle cy={point.y} cx={point.x} r='2.5'></circle>
     {/each}
+
   </svg>
-  {#each tableOnDiagram as tablePos}
-    <Table {tables} {tablePos} />
-  {/each}
 </div>
 
 <style>

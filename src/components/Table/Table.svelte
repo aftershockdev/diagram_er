@@ -1,11 +1,17 @@
 <script lang="ts">
   import type { ITable } from "./data-model";
   import type { ITableOnDiagram } from "../Diagram/diagram";
+  import { createEventDispatcher } from 'svelte';
 
   export let tables: ITable[];
   export let tablePos: ITableOnDiagram;
 
   const { columns } = tables.find(el => el.name === tablePos.name);
+
+  const dispatch = createEventDispatcher();
+
+  const getTable = () => dispatch('pick', tablePos);
+  const stopTable = () => dispatch('stop');
 </script>
 
 <div
@@ -15,6 +21,8 @@
   top: {tablePos.top}px;
   width: {tablePos.width}px;
   height: {tablePos.height}px"
+  on:mousedown={getTable}
+  on:mouseup={stopTable}
 >
    <p>{tablePos.name}</p>
   <!-- <div class="t-header">
@@ -45,19 +53,5 @@
     margin: 0;
     padding: 0;
   }
-  .t-header {
-    font-weight: bold;
-    border: 1px solid rgb(103, 1, 204);
-    background-color: rgb(103, 1, 204);
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 10px;
-    align-items: center;
-  }
-  .t-body {
-    display: grid;
-    grid-template-columns: 40px 100px 1fr;
-    grid-template-rows: 30px;
-  }
+
 </style>

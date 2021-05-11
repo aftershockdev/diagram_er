@@ -3,8 +3,6 @@ import type { IPoint } from "./diagram";
 export const getOrthogonalPoints = (secP: IPoint, preEndP: IPoint, points: IPoint[]): IPoint[] => {
 let initialValue = 1;
 
-console.log(secP)
-
 const result = points.map((el, i) => {
     if (!i) {
       if (el.x === secP.x || el.y === secP.y)
@@ -31,5 +29,5 @@ const result = points.map((el, i) => {
 
   }).filter(el => el !== undefined)
 
-  return result
+  return [secP, ...result, preEndP]
 }

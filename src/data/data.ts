@@ -54,22 +54,22 @@ export const diagram: IDiagram = {
     },
     {
       name: "Suppliers",
-      left: 90,
+      left: 150,
       top: 250,
       width: 50,
       height: 50,
     },
     {
       name: "Categories",
-      left: 150,
-      top: 300,
+      left: 160,
+      top: 330,
       width: 50,
       height: 50,
     },
     {
       name: "Orders",
       left: 240,
-      top: 50,
+      top: 160,
       width: 50,
       height: 50,
     },
@@ -78,51 +78,51 @@ export const diagram: IDiagram = {
     {
       from: {
         name: "Products",
-        side: SideEnum.left,
-        shift: 10,
+        side: SideEnum.right,
+        shift: 0,
       },
       to: {
         name: "Orders",
         side: SideEnum.right,
-        shift: 15,
-      },
-    },
-    {
-      from: {
-        name: "Orders",
-        side: SideEnum.top,
-        shift: 5,
-      },
-      to: {
-        name: "Products",
-        side: SideEnum.bottom,
-        shift: 15,
+        shift: 0,
       },
     },
     {
       from: {
         name: "Categories",
-        side: SideEnum.right,
-        shift: 10,
-      },
-      to: {
-        name: "Orders",
-        side: SideEnum.left,
-        shift: 10,
-      },
-    },
-    {
-      from: {
-        name: "Products",
-        side: SideEnum.top,
-        shift: 10,
+        side: SideEnum.bottom,
+        shift: 0,
       },
       to: {
         name: "Suppliers",
         side: SideEnum.top,
-        shift: 5,
+        shift: 0,
       },
     },
+    // {
+    //   from: {
+    //     name: "Categories",
+    //     side: SideEnum.right,
+    //     shift: 0,
+    //   },
+    //   to: {
+    //     name: "Orders",
+    //     side: SideEnum.left,
+    //     shift: 0,
+    //   },
+    // },
+    // {
+    //   from: {
+    //     name: "Products",
+    //     side: SideEnum.top,
+    //     shift: 0,
+    //   },
+    //   to: {
+    //     name: "Suppliers",
+    //     side: SideEnum.top,
+    //     shift: 0,
+    //   },
+    // },
   ],
 };
 export const diagram_1: IDiagram = {
@@ -450,12 +450,12 @@ export const diagram_4: IDiagram = {
       from: {
         name: "Suppliers",
         side: SideEnum.right,
-        shift: 10,
+        shift: 0,
       },
       to: {
         name: "Products",
         side: SideEnum.left,
-        shift: 12,
+        shift: 0,
       },
     },
   ],
@@ -738,12 +738,11 @@ export const simple_diagram: IDiagram = {
         shift: 0,
       },
       points: [
-        { x: 50, y: 270 },
-        { x: 50, y: 180 },
-        { x: 230, y: 180 },
-        { x: 230, y: 270 },
-        { x: 370, y: 270 },
-        { x: 370, y: 180 },
+        { x: 200, y: 270 },
+        { x: 200, y: 180 },
+        { x: 250, y: 180 },
+        { x: 250, y: 100 },
+        { x: 325, y: 100 },
       ],
     },
     {
@@ -761,8 +760,6 @@ export const simple_diagram: IDiagram = {
       points: [
         { x: 80, y: 300 },
         { x: 250, y: 300 },
-        { x: 250, y: 350 },
-        { x: 300, y: 350 },
         { x: 300, y: 300 },
         { x: 325, y: 300 },
       ],
@@ -821,11 +818,7 @@ export const simple_diagram_1: IDiagram = {
         side: SideEnum.bottom,
         shift: 0,
       },
-      points: [
-        { x: 280, y: 370 },
-        { x: 280, y: 470 },
-        { x: 125, y: 470 },
-      ],
+
     },
   ],
 }

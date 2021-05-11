@@ -33,3 +33,6 @@ export interface ITableOnDiagram {
   width: number;
   height: number;
 }
+
+export type BasicCardinalPoint = 'n' | 'e' | 's' | 'w';
+export type BendDirection = BasicCardinalPoint | 'unknown' | 'none';
