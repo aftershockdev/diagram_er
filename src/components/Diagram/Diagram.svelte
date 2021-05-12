@@ -69,8 +69,8 @@
 <style>
   .wrapper {
     position: relative;
-    height: 500px;
-    width: 500px;
+    height: 100vh;
+    width: 100vw;
     background: rgba(0, 0, 0, 0.1);
   }
   .p {

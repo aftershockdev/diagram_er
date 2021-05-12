@@ -47,38 +47,38 @@ export const diagram: IDiagram = {
   tableOnDiagram: [
     {
       name: "Products",
-      left: 30,
-      top: 150,
-      width: 50,
-      height: 50,
+      left: 250,
+      top: 100,
+      width: 100,
+      height: 100,
     },
     {
       name: "Suppliers",
-      left: 150,
+      left: 600,
       top: 250,
-      width: 50,
-      height: 50,
+      width: 100,
+      height: 100,
     },
     {
       name: "Categories",
-      left: 160,
-      top: 330,
-      width: 50,
-      height: 50,
+      left: 900,
+      top: 500,
+      width: 100,
+      height: 100,
     },
     {
       name: "Orders",
-      left: 240,
-      top: 160,
-      width: 50,
-      height: 50,
+      left: 100,
+      top: 500,
+      width: 100,
+      height: 100,
     },
   ],
   relationToShow: [
     {
       from: {
         name: "Products",
-        side: SideEnum.right,
+        side: SideEnum.left,
         shift: 0,
       },
       to: {
@@ -90,12 +90,12 @@ export const diagram: IDiagram = {
     {
       from: {
         name: "Categories",
-        side: SideEnum.bottom,
+        side: SideEnum.top,
         shift: 0,
       },
       to: {
         name: "Suppliers",
-        side: SideEnum.top,
+        side: SideEnum.bottom,
         shift: 0,
       },
     },
@@ -111,18 +111,18 @@ export const diagram: IDiagram = {
     //     shift: 0,
     //   },
     // },
-    // {
-    //   from: {
-    //     name: "Products",
-    //     side: SideEnum.top,
-    //     shift: 0,
-    //   },
-    //   to: {
-    //     name: "Suppliers",
-    //     side: SideEnum.top,
-    //     shift: 0,
-    //   },
-    // },
+    {
+      from: {
+        name: "Orders",
+        side: SideEnum.right,
+        shift: 0,
+      },
+      to: {
+        name: "Products",
+        side: SideEnum.top,
+        shift: 0,
+      },
+    },
   ],
 };
 export const diagram_1: IDiagram = {
