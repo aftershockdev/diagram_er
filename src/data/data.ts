@@ -75,18 +75,18 @@ export const diagram: IDiagram = {
     },
   ],
   relationToShow: [
-    {
-      from: {
-        name: "Products",
-        side: SideEnum.left,
-        shift: 0,
-      },
-      to: {
-        name: "Orders",
-        side: SideEnum.right,
-        shift: 0,
-      },
-    },
+    // {
+    //   from: {
+    //     name: "Products",
+    //     side: SideEnum.left,
+    //     shift: 0,
+    //   },
+    //   to: {
+    //     name: "Orders",
+    //     side: SideEnum.right,
+    //     shift: 0,
+    //   },
+    // },
     {
       from: {
         name: "Categories",
@@ -114,12 +114,12 @@ export const diagram: IDiagram = {
     {
       from: {
         name: "Orders",
-        side: SideEnum.right,
+        side: SideEnum.top,
         shift: 0,
       },
       to: {
         name: "Products",
-        side: SideEnum.top,
+        side: SideEnum.left,
         shift: 0,
       },
     },

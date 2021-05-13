@@ -71,7 +71,7 @@ export const getRelationPoints = (diagram: IDiagram): IPoint[][] => {
 
     const interimPoints = points ?
       getOrthogonalPoints(secondPoint, preEndPoint, points):
-      getInterimPoints(secondPoint, from.side, preEndPoint, to.side, shapeA, shapeB);
+      getInterimPoints(secondPoint, preEndPoint, from.side, to.side, shapeA, shapeB);
 
     return removeUnnecessaryPoints([
       startPoint,
