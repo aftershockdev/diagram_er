@@ -11,8 +11,9 @@
   export let diagram: IDiagram;
   export let dataModel: IDataModel;
 
-  const { tables } = dataModel;
-  const { tableOnDiagram } = diagram;
+  $: relationToShow = diagram.relationToShow;
+  $: tables = dataModel.tables;
+  $: listOfTablesOnDiagram = diagram.tableOnDiagram;
 
   let pickedTable: ITableOnDiagram;
   let relationPoints = getRelationPoints(diagram);
@@ -23,15 +24,15 @@
   let lineRoute: IPoint[];
 
   export const getInnerPoints = (diagram: IDiagram): IPoint[][] =>
-    diagram.relationToShow.filter(rel =>  rel.points !== undefined).map(_ => _.points)
+    relationToShow.filter(rel =>  rel.points !== undefined).map(_ => _.points)
 
   export const updatePoint = (indexs: number[],  dir: DirectionEnum, ev: MouseEvent): void => {
     let v: number;
 
      relationPoints.find((_, index) => {
        if (_ === lineRoute) {
-         v = index
-         return _
+         v = index;
+         return true;
        }
     }).forEach((p, i) => {
       indexs.forEach((ind) => {
@@ -67,13 +68,10 @@
   const moveTable = (ev?: MouseEvent): void => {
     if(!pickedTable) return;
 
-   tableOnDiagram.forEach((_, i) => {
-     if (_.left === pickedTable.left && _.top === pickedTable.top) {
-      diagram.tableOnDiagram[i].left = ev.offsetX;
-      diagram.tableOnDiagram[i].top = ev.offsetY;
-      relationPoints = getRelationPoints(diagram);
-     }
-   })
+    pickedTable.left = ev.offsetX;
+    pickedTable.top = ev.offsetY;
+    listOfTablesOnDiagram = listOfTablesOnDiagram;
+    relationPoints = getRelationPoints(diagram);
   }
 
   const stopTable = (): void => {
@@ -92,7 +90,7 @@
           hSegmentsIndx.push(i)
         }
       }
-      if( vert) {
+      if(vert) {
         if (_.y === vert.y) { 
           vSegmentsIndx.push(i)
         }
@@ -125,19 +123,19 @@
 <div class="wrapper" on:mousemove={moveTable} on:mouseup={stopTable}>
   <svg width="100%" height="100%" on:mousemove={moveLine}  on:mouseup={stopLine}>
     {#each relationPoints.flat() as point}
-    <circle cy={point.y} cx={point.x} r='2.5'></circle>
+      <circle cy={point.y} cx={point.x} r='2.5'></circle>
     {/each}
     {#each relationPoints as points}
-    <Marker />
+      <Marker />
     <polyline
-    on:mousedown={(e) => pickLine(points, e)}
-    points={convertToString(points)}
-    marker-start="url(#fromOne)"
-    marker-end="url(#toMany)"
+      on:mousedown={(e) => pickLine(points, e)}
+      points={convertToString(points)}
+      marker-start="url(#fromOne)"
+      marker-end="url(#toMany)"
     />
     {/each}
-    {#each diagram.tableOnDiagram as tablePos}
-    <rect on:mousedown={pickTable(tablePos)} x={tablePos.left} y={tablePos.top} width={tablePos.width} height={tablePos.height} fill='blue' opacity='0.5'/>
+    {#each listOfTablesOnDiagram as tOnDiagram}
+      <rect on:mousedown={pickTable(tOnDiagram)} x={tOnDiagram.left} y={tOnDiagram.top} width={tOnDiagram.width} height={tOnDiagram.height} fill='blue' opacity='0.5'/>
       <!-- <Table on:pick={pickTable(tablePos)} {tables} {tablePos} /> -->
     {/each}
   </svg>
