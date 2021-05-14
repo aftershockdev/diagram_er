@@ -4,6 +4,10 @@ export enum SideEnum {
   top = "top",
   bottom = "bottom",
 }
+export enum DirectionEnum {
+  v = 'v',
+  h = 'h'
+}
 
 export interface IDiagram {
   tableOnDiagram: ITableOnDiagram[];

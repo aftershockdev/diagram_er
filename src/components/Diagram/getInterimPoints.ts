@@ -1,8 +1,6 @@
 import { IPoint, ITableOnDiagram, SideEnum } from "./diagram";
+import { makeP } from "./getPoint";
 
-export const makeP = (x: number, y: number): IPoint => {
-  return { x , y };
-}
 export const getInterimPoints = (
   start: IPoint,
   end: IPoint,

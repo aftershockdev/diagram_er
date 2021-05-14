@@ -1,5 +1,9 @@
 import { IPoint, IRelativePoint, ITableOnDiagram, SideEnum } from "./diagram";
 
+export const makeP = (x: number, y: number): IPoint => {
+  return { x , y };
+}
+
 export const getPoint = (pos: ITableOnDiagram, rel: IRelativePoint): IPoint => {
   const divison = 0.5;
   const yPos = pos.height * divison + pos.top + rel.shift;

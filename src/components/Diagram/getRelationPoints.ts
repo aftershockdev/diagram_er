@@ -34,7 +34,7 @@ const getBend = (a: IPoint, b: IPoint, c: IPoint): BendDirection => {
   throw new Error('Nope');
 }
 
-const removeUnnecessaryPoints = (points: IPoint[]): IPoint[] => {
+export const removeUnnecessaryPoints = (points: IPoint[]): IPoint[] => {
   if (points.length <= 2)
     return points;
 
@@ -51,6 +51,7 @@ const removeUnnecessaryPoints = (points: IPoint[]): IPoint[] => {
       const next = points[i + 1];
 
       const bend = getBend(prev, cur, next);
+      
       if (bend !== 'none')
         r.push(cur);
   }
