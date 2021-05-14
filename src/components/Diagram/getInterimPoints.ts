@@ -16,6 +16,7 @@ export const getInterimPoints = (
     return [start, ...p ,end]
   }
   const m = 40;
+  const margin = m * 0.5;
 
   const xDif = start.x - end.x ;
   const yDif = start.y - end.y ;
@@ -41,32 +42,19 @@ export const getInterimPoints = (
 
     switch (sideB) {
       case SideEnum.left:
-
+      
         if (vertIntersected) {
-          if (shapeA.top > shapeB.top + shapeB.height) {
+          if (shapeA.left <= shapeB.left) {
             return points([
-              makeP(end.x - horDistance, start.y),
+              makeP(start.x -horDistance, start.y),
               makeP(end.x , start.y),
             ])
           }
-
-          if (shapeA.top > shapeB.top) {
-            if (shapeA.left < shapeB.left) {
-              return points([
-                makeP(start.x -horDistance, start.y),
-                makeP(end.x , start.y),
-              ])
-            }
-
-            return points([
-              makeP(midX , start.y),
-              makeP(midX , end.y + vertDistance ),
-              makeP(end.x, end.y + vertDistance ),
-              makeP(end.x , start.y),
-            ])
-          }
+           
           return points([
-            makeP(end.x - horDistance, start.y),
+            makeP(midX + m , start.y ),
+            makeP(midX + m , end.y + vertDistance - margin ),
+            makeP(end.x, end.y + vertDistance - margin ),
             makeP(end.x , start.y),
           ])
         }
