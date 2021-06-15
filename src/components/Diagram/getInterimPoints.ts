@@ -31,10 +31,8 @@ export const getInterimPoints = (
   const horDistance = horA > horB ? horA : horB
   const vertDistance = vertA > vertB ? vertA : vertB
 
-
   const horIntersected = shapeA.left >= shapeB.left
   const vertIntersected = shapeA.top >= shapeB.top
-
 
   if(sideA === SideEnum.top){
 

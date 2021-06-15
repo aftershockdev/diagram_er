@@ -4,27 +4,27 @@
   import { createEventDispatcher } from 'svelte';
 
   export let tables: ITable[];
-  export let tablePos: ITableOnDiagram;
+  export let tOnDiagram: ITableOnDiagram;
 
-  const { columns } = tables.find(el => el.name === tablePos.name);
+  const { columns } = tables.find(el => el.name === tOnDiagram.name);
 
   const dispatch = createEventDispatcher();
 
-  const getTable = () => dispatch('pick', tablePos);
+  const getTable = () => dispatch('pick', tOnDiagram);
   const stopTable = () => dispatch('stop');
 </script>
 
 <div
   class="table"
   style="
-  left: {tablePos.left}px;
-  top: {tablePos.top}px;
-  width: {tablePos.width}px;
-  height: {tablePos.height}px"
+  left: {tOnDiagram.left}px;
+  top: {tOnDiagram.top}px;
+  width: {tOnDiagram.width}px;
+  height: {tOnDiagram.height}px"
   on:mousedown={getTable}
   on:mouseup={stopTable}
 >
-   <p>{tablePos.name}</p>
+   <p>{tOnDiagram.name}</p>
   <!-- <div class="t-header">
     <p>'№'</p>
     <p>Name</p>
