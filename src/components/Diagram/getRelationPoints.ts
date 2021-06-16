@@ -1,9 +1,9 @@
-import type { IDiagram, IPoint, IRelativePoint, BendDirection, ITableOnDiagram } from "./diagram";
+import { IDiagram, IPoint, IRelativePoint, BendDirection, ITableOnDiagram, DirectionEnum, IPointWithDirection } from "./diagram";
 import { getPoint } from "./getPoint";
+import { makeP } from "./getPoint";
 import { getNextPoint } from './getNextPoint';
 import { getInterimPoints } from './getInterimPoints';
 import { getOrthogonalPoints } from "./getOrthogonalPoints";
-
 
 const getTable = (table: ITableOnDiagram[] , name: string): ITableOnDiagram => table.find(_ => _.name === name);
 
@@ -81,3 +81,73 @@ export const getRelationPoints = (diagram: IDiagram): IPoint[][] => {
     ])
   });
 };
+
+export const getLinesBreakPoints = (p: IPoint[]): IPoint[] => {
+  if (p.length < 2)
+    return p;
+
+  const breakPoints: IPoint[] = [];
+
+  for (let i = 0; i < p.length; i++) {
+    const cur = p[i];
+    const next = p[i + 1];
+   
+    if (i !== p.length - 1) { 
+        if (cur.x === next.x) {
+            const yDif = cur.y - next.y;
+            const midYstart = cur.y - yDif / 1.5;
+            const midYend = cur.y - yDif / 3;
+            breakPoints.push(
+              makeP(cur.x, midYstart),
+              makeP(cur.x, midYend)
+            );
+        }
+        if (cur.y === next.y) {
+            const xDif = cur.x - next.x;
+            const midXstart = cur.x - xDif / 1.5;
+            const midXend = cur.x - xDif / 3;
+
+            breakPoints.push(
+              makeP(midXstart, cur.y),
+              makeP(midXend, cur.y)
+            );
+        }
+    }
+  }
+
+  return breakPoints;
+}
+
+export const getLinesDirectionMiddlePoints = (p: IPoint[]): IPointWithDirection[] => {
+  const middlePoints: IPointWithDirection[] = [];
+
+  for (let i = 0; i < p.length; i++) {
+    const cur = p[i];
+    const next = p[i + 1];
+   
+    if (i !== p.length - 1) { 
+        if (cur.x === next.x) {
+            const yDif = cur.y - next.y;
+            const midY = cur.y - yDif / 2;
+            middlePoints.push({
+              direction: DirectionEnum.h,
+              point: makeP(cur.x, midY),
+              segmentStartPoint: makeP(cur.x, cur.y),
+              segmentEndPoint: makeP(next.x, next.y)
+            });
+        }
+        if (cur.y === next.y) {
+            const xDif = cur.x - next.x;
+            const midX = cur.x - xDif / 2;
+            middlePoints.push({
+              direction: DirectionEnum.v,
+              point: makeP(midX, cur.y),
+              segmentStartPoint: makeP(cur.x, cur.y),
+              segmentEndPoint: makeP(next.x, next.y)
+            });
+        }
+    }
+  }
+
+  return middlePoints
+}

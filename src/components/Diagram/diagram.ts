@@ -24,12 +24,21 @@ export interface IPoint {
   x: number;
   y: number;
 }
+
+export interface IPointWithDirection {
+  direction: DirectionEnum;
+  point: IPoint;
+  segmentStartPoint: IPoint;
+  segmentEndPoint: IPoint;
+}
+
 export interface IRelationToShow {
   relName?: string;
   from: IRelativePoint;
   to: IRelativePoint;
   points?: IPoint[];
 }
+
 export interface ITableOnDiagram {
   name: string;
   left: number;

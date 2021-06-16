@@ -8,14 +8,14 @@
   export let diagram: IDiagram;
   export let dataModel: IDataModel;
 
-  $: relationToShow = diagram.relationToShow;
   $: tables = dataModel.tables;
-  $: listOfTablesOnDiagram = diagram.tableOnDiagram;
-
-  let pickedTable: ITableOnDiagram;
+  $: relationToShow = diagram.relationToShow;
   $: relationPoints = getRelationPoints(diagram);
+  $: listOfTablesOnDiagram = diagram.tableOnDiagram;
+  
+  let pickedTable: ITableOnDiagram;
 
-  export const getInnerPoints = (diagram: IDiagram): IPoint[][] =>
+  export const getInnerPoints = (): IPoint[][] =>
     relationToShow.filter(rel =>  rel.points !== undefined).map(_ => _.points)
 
   const pickTable = (table: ITableOnDiagram): any => {
@@ -28,7 +28,6 @@
     pickedTable.left = ev.offsetX - (pickedTable.width / 2);
     pickedTable.top = ev.offsetY - (pickedTable.height / 2);
     listOfTablesOnDiagram = listOfTablesOnDiagram;
-    relationPoints = relationPoints;
   }
 
   const stopTable = (): void => {
@@ -39,11 +38,10 @@
 
 <div class="wrapper" on:mousemove={moveTable} on:mouseup={stopTable}>
   <svg width="100%" height="100%">
-    <Line {relationPoints} />
-    {#each listOfTablesOnDiagram as tOnDiagram}
-      <rect on:mousedown={pickTable(tOnDiagram)} x={tOnDiagram.left} y={tOnDiagram.top} width={tOnDiagram.width} height={tOnDiagram.height} fill='blue' opacity='0.5'/>
-      <!-- <Table on:pick={pickTable(tOnDiagram)} {tables} {tOnDiagram} /> -->
-    {/each}
+    <Line {relationPoints} {pickedTable} />
+      {#each listOfTablesOnDiagram as tOnDiagram}
+        <rect on:mousedown={pickTable(tOnDiagram)} x={tOnDiagram.left} y={tOnDiagram.top} width={tOnDiagram.width} height={tOnDiagram.height} fill='blue' opacity='0.5'/>
+      {/each}
   </svg>
 </div>
 
