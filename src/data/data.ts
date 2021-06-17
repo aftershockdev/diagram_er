@@ -87,18 +87,6 @@ export const diagram: IDiagram = {
     //     shift: 0,
     //   },
     // },
-    {
-      from: {
-        name: "Categories",
-        side: SideEnum.top,
-        shift: 0,
-      },
-      to: {
-        name: "Suppliers",
-        side: SideEnum.bottom,
-        shift: 0,
-      },
-    },
     // {
     //   from: {
     //     name: "Categories",
@@ -113,6 +101,18 @@ export const diagram: IDiagram = {
     // },
     {
       from: {
+        name: "Categories",
+        side: SideEnum.top,
+        shift: 0,
+      },
+      to: {
+        name: "Suppliers",
+        side: SideEnum.bottom,
+        shift: 0,
+      },
+    },
+    {
+      from: {
         name: "Orders",
         side: SideEnum.top,
         shift: 0,
@@ -125,6 +125,7 @@ export const diagram: IDiagram = {
     },
   ],
 };
+
 export const diagram_1: IDiagram = {
   tableOnDiagram: [
     {

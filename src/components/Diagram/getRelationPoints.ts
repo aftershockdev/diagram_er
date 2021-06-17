@@ -59,6 +59,7 @@ export const removeUnnecessaryPoints = (points: IPoint[]): IPoint[] => {
 }
 
 export const getRelationPoints = (diagram: IDiagram): IPoint[][] => {
+
   const { tableOnDiagram, relationToShow } = diagram;
 
   return relationToShow.map(({from, to, points}) => {
@@ -70,13 +71,22 @@ export const getRelationPoints = (diagram: IDiagram): IPoint[][] => {
     const shapeA = getTable(tableOnDiagram, from.name);
     const shapeB = getTable(tableOnDiagram, to.name);
 
-    const interimPoints = points ?
-      getOrthogonalPoints(secondPoint, preEndPoint, points):
-      getInterimPoints(secondPoint, preEndPoint, from.side, to.side, shapeA, shapeB);
-
+    const interimPoints = getInterimPoints(secondPoint, preEndPoint, from.side, to.side, shapeA, shapeB);
+    const p = points ? points : interimPoints;
+     
+    if (points) {
+      const secP = getNextPoint(points[points.length - 1], from)
+      const endP = getNextPoint(endPoint, to); 
+      return removeUnnecessaryPoints([
+        secondPoint,
+        ...points,
+        ...getInterimPoints(secP, endP, from.side, to.side, shapeA, shapeB),
+        endPoint
+      ])
+    }
     return removeUnnecessaryPoints([
       startPoint,
-      ...interimPoints,
+      ...p,
       endPoint,
     ])
   });

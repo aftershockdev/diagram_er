@@ -28,13 +28,13 @@ export const getInterimPoints = (
   const horA = shapeA.width * 0.5 + m;
   const horB = shapeB.width * 0.5 + m;
 
-  const horDistance = horA > horB ? horA : horB
-  const vertDistance = vertA > vertB ? vertA : vertB
+  const horDistance = horA > horB ? horA : horB;
+  const vertDistance = vertA > vertB ? vertA : vertB;
 
-  const horIntersected = shapeA.left >= shapeB.left
-  const vertIntersected = shapeA.top >= shapeB.top
+  const horIntersected = shapeA.left >= shapeB.left;
+  const vertIntersected = shapeA.top >= shapeB.top;
 
-  if(sideA === SideEnum.top){
+  if (sideA === SideEnum.top) {
 
     switch (sideB) {
       case SideEnum.left:
@@ -110,27 +110,27 @@ export const getInterimPoints = (
 
   if (sideA === SideEnum.right || sideA === SideEnum.left && sideB === SideEnum.right || sideB === SideEnum.left) {
 
-    if (yDif >= Math.abs(vertDistance) || yDif <= -Math.abs(vertDistance) ) {
-      return points([
-        makeP(start.x, midY),
-        makeP(end.x, midY)
-      ])
-    }
+      if (yDif >= Math.abs(vertDistance) || yDif <= -Math.abs(vertDistance) ) {
+        return points([
+          makeP(start.x, midY),
+          makeP(end.x, midY)
+        ])
+      }
 
-    if (vertIntersected) {
-      return points([
-        makeP(start.x, midY - vertDistance),
-        makeP(end.x,midY - vertDistance)
-      ])
-    }
+      if (vertIntersected) {
+        return points([
+          makeP(start.x, midY - vertDistance),
+          makeP(end.x,midY - vertDistance)
+        ])
+      }
 
-    if (!vertIntersected) {
-      return points([
-        makeP(start.x, midY + vertDistance),
-        makeP(end.x,midY + vertDistance)
-      ])
+      if (!vertIntersected) {
+        return points([
+          makeP(start.x, midY + vertDistance),
+          makeP(end.x,midY + vertDistance)
+        ])
+      }
     }
-  }
     return points([
       makeP(start.x, midY),
       makeP(end.x, midY)

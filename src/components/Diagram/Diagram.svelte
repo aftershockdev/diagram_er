@@ -13,7 +13,7 @@
   $: relationPoints = getRelationPoints(diagram);
   $: listOfTablesOnDiagram = diagram.tableOnDiagram;
   
-  let pickedTable: ITableOnDiagram;
+  $: pickedTable = null;
 
   export const getInnerPoints = (): IPoint[][] =>
     relationToShow.filter(rel =>  rel.points !== undefined).map(_ => _.points)
@@ -30,20 +30,32 @@
     listOfTablesOnDiagram = listOfTablesOnDiagram;
   }
 
+  const updateRelationsOnDiagram = (event) => {
+      const { points, index } = event.detail;
+      if (!relationToShow[index].points) {
+        relationToShow[index].points = points;
+      } else {
+        relationToShow[index].points =  relationToShow[index].points;
+      }
+  }
   const stopTable = (): void => {
     pickedTable = null;
   }
 
+  const clickAway = (): void => {
+    pickedTable = null;
+  }
+  
 </script>
 
-<div class="wrapper" on:mousemove={moveTable} on:mouseup={stopTable}>
-  <svg width="100%" height="100%">
-    <Line {relationPoints} {pickedTable} />
+  <div class="wrapper" on:mousemove={moveTable} on:mouseup={stopTable} on:click={clickAway}>
+    <svg width="100%" height="100%">
       {#each listOfTablesOnDiagram as tOnDiagram}
         <rect on:mousedown={pickTable(tOnDiagram)} x={tOnDiagram.left} y={tOnDiagram.top} width={tOnDiagram.width} height={tOnDiagram.height} fill='blue' opacity='0.5'/>
       {/each}
-  </svg>
-</div>
+      <Line {relationPoints} {pickedTable} on:update={updateRelationsOnDiagram} />
+    </svg>
+  </div>
 
 <style>
   .wrapper {
