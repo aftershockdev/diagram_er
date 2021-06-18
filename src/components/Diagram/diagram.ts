@@ -25,11 +25,21 @@ export interface IPoint {
   y: number;
 }
 
-export interface IPointWithDirection {
+export interface IConnectorMoverPoint {
   direction: DirectionEnum;
   point: IPoint;
   segmentStartPoint: IPoint;
   segmentEndPoint: IPoint;
+}
+export interface IRotatePoints {
+  first: IPoint;
+  second: IPoint;
+  insertIndex: number;
+}
+export interface IConnectorBreakerPoint {
+  direction: DirectionEnum;
+  point: IPoint;
+  rotatePoints: IRotatePoints;
 }
 
 export interface IRelationToShow {

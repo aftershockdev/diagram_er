@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type { IPoint } from './diagram';
+    import type { IPoint, IConnectorBreakerPoint } from './diagram';
     export let routePoints: IPoint[];
     export let pointsVisible: boolean;
-    export let linesBreakPoints: IPoint[];
+    export let linesBreakPoints: IConnectorBreakerPoint[];
 </script>
 
 {#if pointsVisible}
@@ -11,7 +11,7 @@
     {/each}
 
     {#each linesBreakPoints as point}
-        <circle class='break' cy={point.y} cx={point.x} r='3'></circle>
+        <circle class='break' cy={point.point.y} cx={point.point.x} r='3'></circle>
     {/each}
 {/if}
 

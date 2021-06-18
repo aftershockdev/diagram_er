@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { IDataModel } from "../Table/data-model";
   import type { IDiagram, IPoint, ITableOnDiagram } from "./diagram";
-  import { getRelationPoints } from "./getRelationPoints";
+  import { getRelationPoints, removeUnnecessaryPoints } from "./getRelationPoints";
   import Table from "../Table/Table.svelte";
-  import Line from "./Line.svelte";
+  import Connector from "./Connector.svelte";
 
   export let diagram: IDiagram;
   export let dataModel: IDataModel;
@@ -32,28 +32,25 @@
 
   const updateRelationsOnDiagram = (event) => {
       const { points, index } = event.detail;
-      if (!relationToShow[index].points) {
-        relationToShow[index].points = points;
-      } else {
-        relationToShow[index].points =  relationToShow[index].points;
-      }
+        relationToShow[index].points = removeUnnecessaryPoints(points);
+    
   }
   const stopTable = (): void => {
     pickedTable = null;
   }
 
-  const clickAway = (): void => {
+  const clickAway = (event): void => {
+    console.log('x', event.offsetX, 'y', event.offsetY);
     pickedTable = null;
   }
-  
 </script>
 
-  <div class="wrapper" on:mousemove={moveTable} on:mouseup={stopTable} on:click={clickAway}>
+  <div class="wrapper" on:mousemove={moveTable} on:mouseup={stopTable} on:click={(e) => clickAway(e)}>
     <svg width="100%" height="100%">
       {#each listOfTablesOnDiagram as tOnDiagram}
         <rect on:mousedown={pickTable(tOnDiagram)} x={tOnDiagram.left} y={tOnDiagram.top} width={tOnDiagram.width} height={tOnDiagram.height} fill='blue' opacity='0.5'/>
       {/each}
-      <Line {relationPoints} {pickedTable} on:update={updateRelationsOnDiagram} />
+      <Connector {relationPoints} {pickedTable} on:update={updateRelationsOnDiagram} />
     </svg>
   </div>
 

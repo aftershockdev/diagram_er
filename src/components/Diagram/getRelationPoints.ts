@@ -1,9 +1,8 @@
-import { IDiagram, IPoint, IRelativePoint, BendDirection, ITableOnDiagram, DirectionEnum, IPointWithDirection } from "./diagram";
+import { IDiagram, IPoint, IRelativePoint, BendDirection, ITableOnDiagram, DirectionEnum, IConnectorMoverPoint, IConnectorBreakerPoint } from "./diagram";
 import { getPoint } from "./getPoint";
 import { makeP } from "./getPoint";
 import { getNextPoint } from './getNextPoint';
 import { getInterimPoints } from './getInterimPoints';
-import { getOrthogonalPoints } from "./getOrthogonalPoints";
 
 const getTable = (table: ITableOnDiagram[] , name: string): ITableOnDiagram => table.find(_ => _.name === name);
 
@@ -32,7 +31,30 @@ const getBend = (a: IPoint, b: IPoint, c: IPoint): BendDirection => {
       return c.x > b.x ? 'e' : 'w';
 
   throw new Error('Nope');
-}
+};
+
+export const removeRepeatedPoints = (points: IPoint[]): IPoint[] => { 
+
+  const result: IPoint[] = [];
+  const map = new Map<number, number[]>();
+
+  points.forEach(p => {
+      const {x, y} = p;
+      let arr: number[] = map.get(y) || map.set(y, []).get(y)!;
+
+      if(arr.indexOf(x) < 0) {
+          arr.push(x);
+      }
+  });
+
+  for(const [y, xs] of map){
+      for(const x of xs){
+          result.push(makeP(x, y));
+      }
+  }
+
+  return result;
+};
 
 export const removeUnnecessaryPoints = (points: IPoint[]): IPoint[] => {
   if (points.length <= 2)
@@ -56,7 +78,7 @@ export const removeUnnecessaryPoints = (points: IPoint[]): IPoint[] => {
         r.push(cur);
   }
   return r;
-}
+};
 
 export const getRelationPoints = (diagram: IDiagram): IPoint[][] => {
 
@@ -64,39 +86,38 @@ export const getRelationPoints = (diagram: IDiagram): IPoint[][] => {
 
   return relationToShow.map(({from, to, points}) => {
     const startPoint = getPointFromTable(diagram, from);
-    const secondPoint = getNextPoint(startPoint, from);
     const endPoint = getPointFromTable(diagram, to);
+    const secondPoint = getNextPoint(startPoint, from);
     const preEndPoint = getNextPoint(endPoint, to);
 
     const shapeA = getTable(tableOnDiagram, from.name);
     const shapeB = getTable(tableOnDiagram, to.name);
 
     const interimPoints = getInterimPoints(secondPoint, preEndPoint, from.side, to.side, shapeA, shapeB);
-    const p = points ? points : interimPoints;
-     
     if (points) {
-      const secP = getNextPoint(points[points.length - 1], from)
-      const endP = getNextPoint(endPoint, to); 
-      return removeUnnecessaryPoints([
-        secondPoint,
+      removeRepeatedPoints(removeUnnecessaryPoints(points));
+      const secP = getNextPoint(points[points.length - 1], to);
+      const preP = getNextPoint(points[0], from);
+  
+      return removeRepeatedPoints(removeUnnecessaryPoints([
+        startPoint,
+        ...getInterimPoints(secondPoint, preP, from.side, to.side, shapeA, shapeB),
         ...points,
-        ...getInterimPoints(secP, endP, from.side, to.side, shapeA, shapeB),
-        endPoint
+        ...getInterimPoints(secP, preEndPoint, to.side, from.side, shapeA, shapeB),
+        endPoint,
       ])
+      )
     }
     return removeUnnecessaryPoints([
       startPoint,
-      ...p,
+      ...interimPoints,
       endPoint,
     ])
   });
 };
 
-export const getLinesBreakPoints = (p: IPoint[]): IPoint[] => {
-  if (p.length < 2)
-    return p;
-
-  const breakPoints: IPoint[] = [];
+export const getConnectorLineBreakPoints = (p: IPoint[]): IConnectorBreakerPoint[] => {
+  const breakPoints = [];
 
   for (let i = 0; i < p.length; i++) {
     const cur = p[i];
@@ -104,32 +125,62 @@ export const getLinesBreakPoints = (p: IPoint[]): IPoint[] => {
    
     if (i !== p.length - 1) { 
         if (cur.x === next.x) {
-            const yDif = cur.y - next.y;
-            const midYstart = cur.y - yDif / 1.5;
-            const midYend = cur.y - yDif / 3;
-            breakPoints.push(
-              makeP(cur.x, midYstart),
-              makeP(cur.x, midYend)
-            );
+            const yDif = cur.y - next.y ;
+            const midYstart = cur.y - yDif / 1.3;
+            const midY = cur.y - yDif / 2;
+            const midYend = cur.y - yDif / 4;
+            
+            breakPoints.push({
+              direction: DirectionEnum.h,
+              point: makeP(cur.x, midYstart),
+              rotatePoints: {
+                first: makeP(cur.x, next.y),
+                second: makeP(cur.x, midY),
+                insertIndex: i
+              }
+            },
+            {
+              direction: DirectionEnum.h,
+              point: makeP(cur.x, midYend),
+              rotatePoints: {
+                first: makeP(cur.x, midY),
+                second: makeP(next.x, next.y)
+              }
+            });
         }
+        
         if (cur.y === next.y) {
             const xDif = cur.x - next.x;
-            const midXstart = cur.x - xDif / 1.5;
-            const midXend = cur.x - xDif / 3;
+            const midXstart = cur.x - xDif / 1.3;
+            const midXend = cur.x - xDif / 4;
+            const midX =  cur.x - xDif / 2;
 
-            breakPoints.push(
-              makeP(midXstart, cur.y),
-              makeP(midXend, cur.y)
-            );
+            breakPoints.push({
+              direction: DirectionEnum.v,
+              point: makeP(midXstart, cur.y),
+              rotatePoints: {
+                first: makeP(next.x, cur.y),
+                second: makeP(midX, cur.y),
+                insertIndex: i
+              }
+            },
+            {
+              direction: DirectionEnum.v,
+              point: makeP(midXend, cur.y),
+              rotatePoints: {
+                first: makeP(midX, cur.y),
+                second: makeP(next.x, next.y)
+              }
+            });
         }
     }
   }
 
   return breakPoints;
-}
+};
 
-export const getLinesDirectionMiddlePoints = (p: IPoint[]): IPointWithDirection[] => {
-  const middlePoints: IPointWithDirection[] = [];
+export const getConnectorMoverPoints = (p: IPoint[]): IConnectorMoverPoint[] => {
+  const middlePoints: IConnectorMoverPoint[] = [];
 
   for (let i = 0; i < p.length; i++) {
     const cur = p[i];
@@ -160,4 +211,4 @@ export const getLinesDirectionMiddlePoints = (p: IPoint[]): IPointWithDirection[
   }
 
   return middlePoints
-}
+};
