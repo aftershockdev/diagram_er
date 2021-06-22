@@ -144,7 +144,8 @@ export const getConnectorLineBreakPoints = (p: IPoint[]): IConnectorBreakerPoint
               point: makeP(cur.x, midYend),
               rotatePoints: {
                 first: makeP(cur.x, midY),
-                second: makeP(next.x, next.y)
+                second: makeP(cur.x, cur.y),
+                insertIndex: i
               }
             });
         }
@@ -152,8 +153,8 @@ export const getConnectorLineBreakPoints = (p: IPoint[]): IConnectorBreakerPoint
         if (cur.y === next.y) {
             const xDif = cur.x - next.x;
             const midXstart = cur.x - xDif / 1.3;
-            const midXend = cur.x - xDif / 4;
             const midX =  cur.x - xDif / 2;
+            const midXend = cur.x - xDif / 4;
 
             breakPoints.push({
               direction: DirectionEnum.v,
@@ -169,7 +170,8 @@ export const getConnectorLineBreakPoints = (p: IPoint[]): IConnectorBreakerPoint
               point: makeP(midXend, cur.y),
               rotatePoints: {
                 first: makeP(midX, cur.y),
-                second: makeP(next.x, next.y)
+                second: makeP(cur.x, cur.y),
+                insertIndex: i
               }
             });
         }
